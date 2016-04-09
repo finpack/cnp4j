@@ -50,7 +50,7 @@ public class CnpValidator {
         int centuryCode = SEX_AND_CENTURY.from(cnp);
         Century century = Century.getByCode(centuryCode);
         int year = century.getStartYear() + YEAR_OF_BIRTH.from(cnp);
-        int month = MONTH_OF_BIRTH.from(cnp);
+        int month = MONTH_OF_BIRTH.from(cnp) - 1;
         int day = DAY_OF_BIRTH.from(cnp);
         try {
             Calendar cal = Calendar.getInstance();
@@ -64,9 +64,7 @@ public class CnpValidator {
 
     private static void validateCounty(final String cnp) {
         int countyCode = COUNTY.from(cnp);
-        if (County.getByCode(countyCode) == null) {
-            throw new Cnp4jException();
-        }
+        County.getByCode(countyCode);
     }
 
     private static void validateOrderNumber(final String cnp) {
