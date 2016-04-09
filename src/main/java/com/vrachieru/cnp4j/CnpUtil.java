@@ -1,5 +1,7 @@
 package com.vrachieru.cnp4j;
 
+import static java.lang.Character.getNumericValue;
+
 public class CnpUtil {
 
     public static final int CNP_LENGTH = 13;
@@ -15,7 +17,7 @@ public class CnpUtil {
     public static int calculateSum(String cnp) {
         int sum = 0;
         for (int i = 0; i < CNP_LENGTH - 1; i++) {
-            sum += Integer.valueOf(cnp.charAt(i)) * WEIGHTS[i];
+            sum += getNumericValue(cnp.charAt(i)) * WEIGHTS[i];
         }
         return sum;
     }
