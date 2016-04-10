@@ -1,5 +1,9 @@
 package com.vrachieru.cnp4j;
 
+import com.vrachieru.cnp4j.exception.InvalidFormatException;
+
+import static com.vrachieru.cnp4j.exception.CnpFormatViolation.NOT_NUMERIC;
+import static org.apache.commons.lang3.StringUtils.leftPad;
 import static org.apache.commons.lang3.StringUtils.substring;
 
 public enum CnpField {
@@ -21,6 +25,15 @@ public enum CnpField {
     }
 
     public int from(String cnp) {
-        return Integer.valueOf(substring(cnp, this.start, this.end));
+        try {
+            return Integer.valueOf(substring(cnp, this.start, this.end));
+        } catch (NumberFormatException e) {
+            throw new InvalidFormatException(this.name(), NOT_NUMERIC);
+        }
+    }
+
+    public String format(Integer value) {
+        int len = this.end - this.start;
+        return leftPad(substring(value.toString(), -len), len, '0');
     }
 }
