@@ -10,7 +10,7 @@
   <description>Library for generation and validation of romanian Personal Numeric Codes.</description>
 
   <properties>
-    <jdk.version>1.7</jdk.version>
+    <jdk.version>1.5</jdk.version>
     <apache.commons.version>3.0</apache.commons.version>
     <junit.version>4.11</junit.version>
   </properties>

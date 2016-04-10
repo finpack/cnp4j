@@ -56,7 +56,7 @@ public enum County {
     CL("Calarasi", 51),
     GR("Giurgiu", 52);
 
-    private static final Map<Integer, County> map = new HashMap<>();
+    private static final Map<Integer, County> map = new HashMap<Integer, County>();
 
     static {
         for (final County county : values()) {
