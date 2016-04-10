@@ -1,6 +1,6 @@
 package com.vrachieru.cnp4j;
 
-import com.vrachieru.cnp4j.exception.Cnp4jException;
+import com.vrachieru.cnp4j.exception.InvalidCountyException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -83,7 +83,7 @@ public enum County {
 
     public static County getByCode(int code) {
         if (!map.containsKey(code)) {
-            throw new Cnp4jException();
+            throw new InvalidCountyException();
         }
         return map.get(code);
     }
