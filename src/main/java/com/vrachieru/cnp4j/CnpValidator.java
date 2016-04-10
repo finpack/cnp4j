@@ -1,8 +1,8 @@
 package com.vrachieru.cnp4j;
 
-import com.vrachieru.cnp4j.exception.Cnp4jException;
-
-import java.util.Calendar;
+import com.vrachieru.cnp4j.exception.InvalidCheckDigitException;
+import com.vrachieru.cnp4j.exception.InvalidFormatException;
+import com.vrachieru.cnp4j.exception.InvalidOrderNumberException;
 
 import static com.vrachieru.cnp4j.CnpField.CHECK_DIGIT;
 import static com.vrachieru.cnp4j.CnpField.COUNTY;
@@ -12,6 +12,7 @@ import static com.vrachieru.cnp4j.CnpField.ORDER_NUMBER;
 import static com.vrachieru.cnp4j.CnpField.SEX_AND_CENTURY;
 import static com.vrachieru.cnp4j.CnpField.YEAR_OF_BIRTH;
 import static com.vrachieru.cnp4j.CnpUtil.CNP_LENGTH;
+import static com.vrachieru.cnp4j.CnpUtil.buildDateOfBirth;
 import static com.vrachieru.cnp4j.CnpUtil.calculateCheckDigit;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.apache.commons.lang3.StringUtils.length;
@@ -30,13 +31,19 @@ public class CnpValidator {
 
     private static void validateLength(final String cnp) {
         if (length(cnp) != CNP_LENGTH) {
-            throw new Cnp4jException();
+            throw new InvalidFormatException();
         }
     }
 
     private static void validateFormat(final String cnp) {
         if (!isNumeric(cnp)) {
-            throw new Cnp4jException();
+            throw new InvalidFormatException();
+        }
+    }
+
+    private static void validateCheckDigit(final String cnp) {
+        if (CHECK_DIGIT.from(cnp) != calculateCheckDigit(cnp)) {
+            throw new InvalidCheckDigitException();
         }
     }
 
@@ -47,36 +54,20 @@ public class CnpValidator {
     }
 
     private static void validateDateOfBirth(final String cnp) {
-        int centuryCode = SEX_AND_CENTURY.from(cnp);
-        Century century = Century.getByCode(centuryCode);
+        Century century = Century.getByCode(SEX_AND_CENTURY.from(cnp));
         int year = century.getStartYear() + YEAR_OF_BIRTH.from(cnp);
         int month = MONTH_OF_BIRTH.from(cnp) - 1;
         int day = DAY_OF_BIRTH.from(cnp);
-        try {
-            Calendar cal = Calendar.getInstance();
-            cal.setLenient(false);
-            cal.set(year, month, day);
-            cal.getTime();
-        } catch (Exception e) {
-            throw new Cnp4jException();
-        }
+        buildDateOfBirth(year, month, day);
     }
 
     private static void validateCounty(final String cnp) {
-        int countyCode = COUNTY.from(cnp);
-        County.getByCode(countyCode);
+        County.getByCode(COUNTY.from(cnp));
     }
 
     private static void validateOrderNumber(final String cnp) {
         if (ORDER_NUMBER.from(cnp) == 0) {
-            throw new Cnp4jException();
-        }
-    }
-
-    private static void validateCheckDigit(final String cnp) {
-        int checkDigit = calculateCheckDigit(cnp);
-        if (CHECK_DIGIT.from(cnp) != checkDigit) {
-            throw new Cnp4jException();
+            throw new InvalidOrderNumberException();
         }
     }
 }
