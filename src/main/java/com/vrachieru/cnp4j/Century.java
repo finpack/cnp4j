@@ -53,4 +53,18 @@ public enum Century {
         }
         return MAPPING.get(code);
     }
+
+    public static Century getFromYear(final int year) {
+        if (year < NINETEENTH.startYear || year > TWENTY_FIRST.endYear) {
+            throw new InvalidCenturyException();
+        }
+        int century = year / 100 * 100;
+        if (NINETEENTH.startYear == century) {
+            return NINETEENTH;
+        } else if (TWENTIETH.startYear == century) {
+            return TWENTIETH;
+        } else {
+            return TWENTY_FIRST;
+        }
+    }
 }
