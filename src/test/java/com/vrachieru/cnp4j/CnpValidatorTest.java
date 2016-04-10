@@ -1,6 +1,6 @@
 package com.vrachieru.cnp4j;
 
-import com.vrachieru.cnp4j.exception.Cnp4jException;
+import com.vrachieru.cnp4j.exception.InvalidCheckDigitException;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -55,7 +55,7 @@ public class CnpValidatorTest {
 
     @Test
     public void validate_failure_invalidCheckDigit() {
-        exception.expect(Cnp4jException.class);
+        exception.expect(InvalidCheckDigitException.class);
         CnpValidator.validate("1910209405800");
     }
 }

@@ -2,7 +2,10 @@ package com.vrachieru.cnp4j;
 
 import org.junit.Test;
 
-import static com.vrachieru.cnp4j.Sex.*;
+import static com.vrachieru.cnp4j.Sex.FEMALE;
+import static com.vrachieru.cnp4j.Sex.MALE;
+import static com.vrachieru.cnp4j.Sex.UNKNOWN;
+import static com.vrachieru.cnp4j.Sex.getByCode;
 import static org.junit.Assert.assertEquals;
 
 public class SexTest {
