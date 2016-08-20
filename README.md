@@ -1,6 +1,6 @@
 # cnp4j
 
-![Travis](https://img.shields.io/travis/vrachieru/cnp4j.svg)
+[![Travis](https://img.shields.io/travis/vrachieru/cnp4j.svg)](https://travis-ci.org/vrachieru/cnp4j)
 [![Coverage Status](https://coveralls.io/repos/github/vrachieru/cnp4j/badge.svg?branch=master)](https://coveralls.io/github/vrachieru/cnp4j?branch=master)
 
 A Java library for generation and validation of the Romanian Personal Identification Number (Cod Numeric Personal, or CNP).
