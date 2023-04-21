@@ -41,4 +41,13 @@
       </plugin>
     </plugins>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>Finpack GitHub Packages</name>
+      <url>https://maven.pkg.github.com/finpack/cnp4j</url>
+    </repository>
+  </distributionManagement>
+
 </project>
