@@ -53,6 +53,8 @@ public enum County {
     B4("Bucuresti S.4", 44),
     B5("Bucuresti S.5", 45),
     B6("Bucuresti S.6", 46),
+    B7("Bucuresti S.7 (obsolete)", 47),
+    B8("Bucuresti S.8 (obsolete)", 48),
     CL("Calarasi", 51),
     GR("Giurgiu", 52);
 
