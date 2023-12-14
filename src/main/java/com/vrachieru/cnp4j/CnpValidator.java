@@ -4,28 +4,20 @@ import com.vrachieru.cnp4j.exception.InvalidCheckDigitException;
 import com.vrachieru.cnp4j.exception.InvalidFormatException;
 import com.vrachieru.cnp4j.exception.InvalidOrderNumberException;
 
-import static com.vrachieru.cnp4j.CnpField.CHECK_DIGIT;
-import static com.vrachieru.cnp4j.CnpField.COUNTY;
-import static com.vrachieru.cnp4j.CnpField.DAY_OF_BIRTH;
-import static com.vrachieru.cnp4j.CnpField.MONTH_OF_BIRTH;
-import static com.vrachieru.cnp4j.CnpField.ORDER_NUMBER;
-import static com.vrachieru.cnp4j.CnpField.SEX_AND_CENTURY;
-import static com.vrachieru.cnp4j.CnpField.YEAR_OF_BIRTH;
-import static com.vrachieru.cnp4j.CnpUtil.CNP_LENGTH;
-import static com.vrachieru.cnp4j.CnpUtil.buildDateOfBirth;
-import static com.vrachieru.cnp4j.CnpUtil.calculateCheckDigit;
+import static com.vrachieru.cnp4j.CnpField.*;
+import static com.vrachieru.cnp4j.CnpUtil.*;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 import static org.apache.commons.lang3.StringUtils.length;
 
 public class CnpValidator {
 
+    // Decision was made to turn off county validation, because specification do not cover all real life cases
     public static void validate(final String cnp) {
         validateLength(cnp);
         validateFormat(cnp);
         validateCheckDigit(cnp);
         validateSexAndCentury(cnp);
         validateDateOfBirth(cnp);
-        validateCounty(cnp);
         validateOrderNumber(cnp);
     }
 
